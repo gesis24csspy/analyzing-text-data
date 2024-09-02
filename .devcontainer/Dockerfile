@@ -1,4 +1,5 @@
-FROM mcr.microsoft.com/devcontainers/base:jammy
+FROM huggingface/transformers-pytorch-cpu:latest
+# FROM huggingface/transformers-pytorch-gpu:latest
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG USER=vscode
