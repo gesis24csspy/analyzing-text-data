@@ -81,6 +81,7 @@ from gensim.models.coherencemodel import CoherenceModel
 import random
 
 set_style()
+!python -m spacy download en_core_web_sm  # shell
 nlp = spacy.load("en_core_web_sm")
 ```
 

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "icsspy"
-packages = [{ include = "icsspy" }]
+packages = [{ include = "src" }]
 version = "0.1.0"
 description = ""
 authors = ["John McLevey <john.mclevey@uwaterloo.ca>"]
