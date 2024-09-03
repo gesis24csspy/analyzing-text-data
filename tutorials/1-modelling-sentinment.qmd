@@ -56,11 +56,9 @@ By the end of this tutorial, you should be able to:
 import pandas as pd
 import spacy
 import requests
-import icsspy
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
-icsspy.set_style()
 nlp = spacy.load("en_core_web_sm")
 ```
 
@@ -260,7 +258,7 @@ Note that the code below will take a while to run. Progress bars will give you a
 :::
 
 ```{python}
-import icsspy.text as t
+import src.text as t
 
 sentiment = t.label_sentiment(
     model=model, df=comments, textcol="text", idcol="comment_id"
@@ -282,7 +280,7 @@ sentiment[['sentiment_negative', 'sentiment_neutral', 'sentiment_positive', 'dom
 Let's plot a comparison. We could do this as a bar graph (or whatever), but I prefer to do it this way:
 
 ```{python}
-from icsspy.networks import plot_line_comparison
+from src.networks import plot_line_comparison
 
 for_plotting = sentiment_counts.to_dict()
 
