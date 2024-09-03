@@ -63,8 +63,8 @@ import numpy as np
 import pandas as pd
 import spacy
 import requests
-import icsspy
-from icsspy.text import preprocess, sparse_groupby, get_topic_word_scores, plot_topic_distribution
+from src.text import preprocess, sparse_groupby, get_topic_word_scores, plot_topic_distribution
+from src.style import set_style
 import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
@@ -80,16 +80,54 @@ from gensim.models.ldamulticore import LdaMulticore
 from gensim.models.coherencemodel import CoherenceModel
 import random
 
-icsspy.set_style()
+set_style()
 nlp = spacy.load("en_core_web_sm")
 ```
 
 # The British Hansard
 
-For the first part of this tutorial, we'll work with a collection of political speeches from the British Parliament, focusing on speeches given between 2016 and 2020. We'll load the data from the course package.
+For the first part of this tutorial, we'll work with a collection of political speeches from the British Parliament, focusing on speeches given between 2016 and 2020. We'll load the data using the command line utility wget. 
+
+
+> Download the Data
+> 
+> We'll download the data using wget. Run the following command in your terminal:
+>
+> ```zsh
+> wget -O "input/2016.csv" "https://www.dropbox.com/scl/fi/c9d1aqzrage1juf276nvd/british_hansard_2016.csv?rlkey=ilyn06y4hw4jocr4fhq6w6olk&st=ioslogzq&dl=0"
+> ```
+>
+> Now you can load the data from `input/` using the code block below.
+
+Alternatively, you can run it in a Quarto Python cell starting with `!`.
 
 ```{python}
-bh1620 = icsspy.load_hansard(years=["2016-2020"], british=True)
+!wget -O "input/bh2016.csv" "https://www.dropbox.com/scl/fi/c9d1aqzrage1juf276nvd/british_hansard_2016.csv?rlkey=ilyn06y4hw4jocr4fhq6w6olk&st=ioslogzq&dl=1"
+
+!wget -O "input/bh2017.csv" "https://www.dropbox.com/scl/fi/c9d1aqzrage1juf276nvd/british_hansard_2016.csv?rlkey=ilyn06y4hw4jocr4fhq6w6olk&st=ioslogzq&dl=1"
+
+!wget -O "input/bh2018.csv" "https://www.dropbox.com/scl/fi/ipzs1gady1wrxtj53fzc2/british_hansard_2018.csv?rlkey=xxrtjp49zf2h9tlbejor47ugd&st=jvf2zexa&dl=1"
+
+!wget -O "input/bh2019.csv" "https://www.dropbox.com/scl/fi/7bw1x8bww7gp84usk4rca/british_hansard_2019.csv?rlkey=zbiyilhpxtidjunfqwh57nyd4&st=ze7nko2m&dl=1"
+
+!wget -O "input/bh2020.csv" "https://www.dropbox.com/scl/fi/60wxtrzibbnk1ck3i9x6f/british_hansard_2020.csv?rlkey=o2c6aq8b6ofmwd96b0t81jywz&st=k889sge3&dl=1"
+```
+
+```{python}
+dfs = []
+for year in [2016, 2017, 2018, 2019, 2020]:
+    df = pd.read_csv(f'input/bh{year}.csv')
+    dfs.append(df)
+
+
+bh1620 = pd.concat(dfs)
+bh1620.reset_index()
+bh1620
+```
+
+```{python}
+# bh1620 = icsspy.load_hansard(years=["2016-2020"], british=True)
+
 bh1620.info()
 ```
 

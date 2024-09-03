@@ -1,6 +1,6 @@
 #!/bin/bash
 
-IMAGE_NAME="mclevey/data-collection"
+IMAGE_NAME="mclevey/transformers"
 BUILDER_NAME="multiarch-builder"
 
 if ! docker buildx inspect "$BUILDER_NAME" >/dev/null 2>&1; then
