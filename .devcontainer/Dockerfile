@@ -24,7 +24,6 @@ RUN DEBIAN_FRONTEND=noninteractive \
     libffi-dev \
     liblzma-dev
 
-# Python and poetry installation
 USER $USER
 ARG HOME="/home/$USER"
 ARG PYTHON_VERSION=3.11
@@ -32,14 +31,15 @@ ARG PYTHON_VERSION=3.11
 ENV PYENV_ROOT="${HOME}/.pyenv"
 ENV PATH="${PYENV_ROOT}/shims:${PYENV_ROOT}/bin:${HOME}/.local/bin:$PATH"
 
-RUN echo "done 0" \
-    && curl https://pyenv.run | bash \
-    && echo "done 1" \
+RUN curl https://pyenv.run | bash \
     && pyenv install ${PYTHON_VERSION} \
-    && echo "done 2" \
     && pyenv global ${PYTHON_VERSION} \
-    && echo "done 3" \
     && curl -sSL https://install.python-poetry.org | python3 - \
     && poetry config virtualenvs.in-project true
 
-CMD ["zsh"]
+COPY ../pyproject.toml ../poetry.lock /app/
+WORKDIR /app
+
+RUN poetry install --no-root
+
+CMD ["zsh", "-l"]

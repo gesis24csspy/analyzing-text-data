@@ -1,14 +1,14 @@
 [tool.poetry]
 name = "icsspy"
-packages = [{ include = "src" }]
+packages = [{ include = "icsspy" }]
 version = "0.1.0"
 description = ""
 authors = ["John McLevey <john.mclevey@uwaterloo.ca>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
-bertopic = { version = "^0.16.3", extras = ["spacy"] }
+python = ">=3.11,<4.0"
+bertopic = "^0.16.3"
 ipykernel = "^6.29.5"
 gensim = "^4.3.3"
 spacy = "^3.7.6"

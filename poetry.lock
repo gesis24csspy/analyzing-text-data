@@ -58,7 +58,6 @@ pandas = ">=1.1.5"
 plotly = ">=4.7.0"
 scikit-learn = ">=0.22.2.post1"
 sentence-transformers = ">=0.4.1"
-spacy = {version = ">=3.0.1", optional = true, markers = "extra == \"spacy\""}
 tqdm = ">=4.41.1"
 umap-learn = ">=0.5.0"
 
@@ -875,6 +874,7 @@ prompt-toolkit = ">=3.0.41,<3.1.0"
 pygments = ">=2.4.0"
 stack-data = "*"
 traitlets = ">=5.13.0"
+typing-extensions = {version = ">=4.6", markers = "python_version < \"3.12\""}
 
 [package.extras]
 all = ["ipython[black,doc,kernel,matplotlib,nbconvert,nbformat,notebook,parallel,qtconsole]", "ipython[test,test-extra]"]
@@ -1803,7 +1803,10 @@ files = [
 ]
 
 [package.dependencies]
-numpy = {version = ">=1.26.0", markers = "python_version >= \"3.12\""}
+numpy = [
+    {version = ">=1.26.0", markers = "python_version >= \"3.12\""},
+    {version = ">=1.23.2", markers = "python_version == \"3.11\""},
+]
 python-dateutil = ">=2.8.2"
 pytz = ">=2020.1"
 tzdata = ">=2022.7"
@@ -3798,5 +3801,5 @@ files = [
 
 [metadata]
 lock-version = "2.0"
-python-versions = "^3.12"
-content-hash = "052e08f2111784a638c6d1feb657dbd030d49b8ed41f5816e67235563e69fca2"
+python-versions = ">=3.11,<4.0"
+content-hash = "f99bf5c142b09a24b01bcd5f86fd06f1efcb7dbc6d4c4411fdff90953e0e8a26"
